@@ -306,6 +306,7 @@ check_libreswan() {
 }
 
 get_libreswan() {
+  return 0
   if [ "$check_result" = "0" ]; then
     bigecho "Downloading Libreswan..."
     cd /opt/src || exit 1
