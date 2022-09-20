@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Script for automatic setup of an IPsec VPN server on Ubuntu and Debian
+# Script for automatic setup of an IPsec VPN server on Ubuntu, Debian, LinuxMint
 #
 # DO NOT RUN THIS SCRIPT ON YOUR PC OR MAC!
 #
@@ -85,8 +85,11 @@ check_os() {
     [Rr]aspbian)
       os_type=raspbian
       ;;
+    [Ll]inux[Mm]int)
+      os_type=linuxmint
+      ;;
     *)
-      exiterr "This script only supports Ubuntu and Debian."
+      exiterr "This script only supports Ubuntu, Debian and LinuxMint."
       ;;
   esac
   os_ver=$(sed 's/\..*//' /etc/debian_version | tr -dc 'A-Za-z0-9')
