@@ -289,6 +289,7 @@ get_swan_ver() {
 check_libreswan() {
   check_result=0
   ipsec_ver=$(ipsec --version 2>/dev/null)
+  echo "IPSEC_VER = $ipsec_ver"
   swan_ver_old=$(printf '%s' "$ipsec_ver" | sed -e 's/.*Libreswan U\?//' -e 's/\( (\|\/K\).*//')
   ipsec_bin="ipsec"
   if [ -n "$swan_ver_old" ] && printf '%s' "$ipsec_ver" | grep -qi 'libreswan' \
