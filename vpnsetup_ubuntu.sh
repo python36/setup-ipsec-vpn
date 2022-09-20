@@ -86,7 +86,7 @@ check_os() {
       os_type=raspbian
       ;;
     [Ll]inux[Mm]int)
-      os_type=linuxmint
+      os_type=ubuntu
       ;;
     *)
       exiterr "This script only supports Ubuntu, Debian and LinuxMint."
@@ -298,6 +298,7 @@ check_libreswan() {
     return 0
   fi
   get_swan_ver
+  echo ""
   if [ -s "$ipsec_bin" ] && [ "$swan_ver_old" = "$SWAN_VER" ]; then
     touch "$ipsec_bin"
   fi
