@@ -325,6 +325,7 @@ get_libreswan() {
 }
 
 install_libreswan() {
+  return 0
   if [ "$check_result" = "0" ]; then
     bigecho "Compiling and installing Libreswan, please wait..."
     cd "libreswan-$SWAN_VER" || exit 1
