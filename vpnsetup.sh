@@ -1,7 +1,7 @@
 #!/bin/sh
 #
-# Script for automatic setup of an IPsec VPN server on Ubuntu, Debian, CentOS/RHEL,
-# Rocky Linux, AlmaLinux, Oracle Linux, Amazon Linux 2 and Alpine Linux
+# Script for automatic setup of an IPsec VPN server on Ubuntu, Debian, LinuxMint,
+# CentOS/RHEL, Rocky Linux, AlmaLinux, Oracle Linux, Amazon Linux 2 and Alpine Linux
 #
 # DO NOT RUN THIS SCRIPT ON YOUR PC OR MAC!
 #
@@ -111,11 +111,14 @@ check_os() {
       [Aa]lpine)
         os_type=alpine
         ;;
+      [Ll]inux[Mm]int)
+        os_type=linuxmint
+        ;;
       *)
 cat 1>&2 <<'EOF'
 Error: This script only supports one of the following OS:
-       Ubuntu, Debian, CentOS/RHEL, Rocky Linux, AlmaLinux,
-       Oracle Linux, Amazon Linux 2 or Alpine Linux
+       Ubuntu, Debian, LinuxMint, CentOS/RHEL, Rocky Linux,
+       AlmaLinux, Oracle Linux, Amazon Linux 2 or Alpine Linux
 EOF
         exit 1
         ;;
@@ -142,7 +145,7 @@ check_iface() {
   def_state=$(cat "/sys/class/net/$def_iface/operstate" 2>/dev/null)
   check_wl=0
   if [ -n "$def_state" ] && [ "$def_state" != "down" ]; then
-    if [ "$os_type" = "ubuntu" ] || [ "$os_type" = "debian" ] || [ "$os_type" = "raspbian" ]; then
+    if [ "$os_type" = "ubuntu" ] || [ "$os_type" = "debian" ] || [ "$os_type" = "raspbian" ] || [ "$os_type" = "linuxmint" ]; then
       if ! uname -m | grep -qi -e '^arm' -e '^aarch64'; then
         check_wl=1
       fi
@@ -218,7 +221,7 @@ wait_for_apt() {
 
 install_pkgs() {
   if ! command -v wget >/dev/null 2>&1; then
-    if [ "$os_type" = "ubuntu" ] || [ "$os_type" = "debian" ] || [ "$os_type" = "raspbian" ]; then
+    if [ "$os_type" = "ubuntu" ] || [ "$os_type" = "debian" ] || [ "$os_type" = "raspbian" ] || [ "$os_type" = "linuxmint" ]; then
       wait_for_apt
       export DEBIAN_FRONTEND=noninteractive
       (
